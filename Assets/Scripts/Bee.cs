@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     Vector3 startPos3D = new Vector3(0, 0, 0);
     Vector3 mousePos2D;
     private bool collided;
+    public bool inKillZonePath = false;
 
     //// Start is called before the first frame update
     //void Start()
@@ -29,6 +30,12 @@ public class Player : MonoBehaviour
             // Freeze
             collided = true;
         }
+        else if (coll.gameObject.tag == "KillZonePath") inKillZonePath = true;
+        
+    }
+
+    private void OnCollisionExit2D(Collision2D coll) {
+        if (coll.gameObject.tag == "KillZonePath") inKillZonePath = false;
     }
 
     void OnMouseDrag()
@@ -45,4 +52,11 @@ public class Player : MonoBehaviour
 
         this.transform.position = mousePos3D;
     }
+
+    // I added this function since the bombs also have to reset the player back to the start
+    public void Reset() {
+        transform.position = startPos3D;
+        collided = true;
+    }
+
 }
