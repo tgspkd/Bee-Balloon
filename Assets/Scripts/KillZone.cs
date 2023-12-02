@@ -5,14 +5,16 @@ using UnityEngine;
 public class KillZone : MonoBehaviour
 {
 
-    [SerializeField] private bool invertMask = false;
+    public bool invertMask = false;
 
 
     [Header("Path Based")]
-    [SerializeField] private bool followsPath = false;
-    [SerializeField] private Transform[] Points;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private int pointsIndex = 0;
+    public bool followsPath = false;
+    public bool reverseOnEnd = false;
+    public bool reversing = false;
+    public Transform[] Points;
+    public float moveSpeed;
+    public int pointsIndex = 0;
 
 
     private void Start() {
@@ -25,15 +27,23 @@ public class KillZone : MonoBehaviour
 
     private void Update() {
         if (followsPath) {
-            if (pointsIndex <= Points.Length - 1) {
+            if (pointsIndex <= Points.Length - 1 && pointsIndex > -1) {
+                // print(pointsIndex);
+                // print(reversing);
+                // print((reversing && pointsIndex >= 0));
                 transform.position = Vector3.MoveTowards(transform.position, Points[pointsIndex].transform.position, moveSpeed * Time.deltaTime);
 
                 if (transform.position == Points[pointsIndex].transform.position) {
-                    pointsIndex++;
+                    pointsIndex += reversing ? -1 : 1;
                 }
             }
             else {
-                pointsIndex = 0;
+                if (reverseOnEnd) {
+                    pointsIndex += reversing ? 1 : -1;
+                    reversing = !reversing;
+                    print(reversing);
+                }
+                else pointsIndex = 0;
                 transform.position = Points[pointsIndex].transform.position;
             }
         }
