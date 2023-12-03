@@ -32,5 +32,9 @@ public class Main : MonoBehaviour
         S.balloonsLeft--; 
         Score++;
     }
+    public static void RemoveBalloon() {
+        S.balloonsLeft--;
+        print("balloon removed");
+    }
 
 }

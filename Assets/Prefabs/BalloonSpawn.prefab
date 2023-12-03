@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.02, y: -2.48, z: 0}
-  m_LocalScale: {x: 4.5, y: 1.525, z: 1}
+  m_LocalScale: {x: 5.1749997, y: 2.2303123, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,6 +91,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balloonPrefab: {fileID: 3597783224544800428, guid: f636a3a1818714408a681c20212f0c6f, type: 3}
-  numBalloons: 10
   minSize: 0.2
   maxSize: 0.7
+  seed: 0

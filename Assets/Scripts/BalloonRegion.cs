@@ -1,67 +1,53 @@
+using static System.DateTime;
 using UnityEngine;
 
 public class BalloonRegion : MonoBehaviour
 {
     public GameObject balloonPrefab;
-    public int numBalloons = 10;
     public float minSize = 1f;
     public float maxSize = 3f;
+    public int seed = 0;
 
     void Start()
     {
+        if (seed == 0) seed = (int)System.DateTime.Now.Ticks;
+        Random.InitState(seed);
         Spawn();
     }
 
-    void Spawn()
-    {
-        for (int i = 0; i < numBalloons; i++)
+    void Spawn() {
+        // Get width and height of container
+        Bounds bounds = GetComponent<BoxCollider2D>().bounds;
+        float width = bounds.extents.x ;
+        float height = bounds.extents.y; 
+
+        // Prevents balloons from having center point on edge
+        float xMod = bounds.min.x;
+        float yMod = bounds.min.y;
+
+        // Calculate the number of rows and columns
+        int rows = Mathf.Max(Mathf.FloorToInt(height / (maxSize * .5f)), 1);
+        int columns = Mathf.Max(Mathf.FloorToInt(width / (maxSize * .5f)), 1);
+
+        // Spawn balloons in a grid
+        for (int row = 0; row < rows; row++)
         {
-            Vector3 randomPosition = new Vector3(
-                Random.Range(-.5f, .5f),
-                Random.Range(-.5f, .5f),
-                0f
-            );
-
-            float randomSize = Random.Range(minSize, maxSize);
-
-            GameObject balloon = Instantiate(balloonPrefab, transform);
-
-
-            balloon.transform.localPosition = randomPosition;
-            balloon.transform.localScale = new Vector3(randomSize / transform.lossyScale.x, randomSize / transform.lossyScale.y, 1f);
-
-            if (Overlap(balloon))
+            for (int col = 0; col < columns; col++)
             {
-                Destroy(balloon);
-                i--;
+                // Generate random size for balloon
+                float size = Random.Range(minSize, maxSize);
+
+                // global x position of balloon
+                float x = col * maxSize + (size / 2);
+                float y = row * maxSize + (size / 2);
+
+                GameObject balloon = Instantiate(balloonPrefab, new Vector3(xMod + x, yMod + y, 0), Quaternion.identity);
+                balloon.transform.localScale = new Vector2(size, size);
+
+                // sets the parent to be this container
+                // makes setting scale and position much easier doing it this way
+                balloon.transform.parent = transform;
             }
         }
-    }
-
-    // This does NOT work
-    bool Overlap(GameObject newBaloon)
-    {
-        Collider2D newCollider = newBaloon.GetComponent<Collider2D>();
-
-        if (newCollider == null)
-        {
-            Debug.LogError("Balloon has no collider?");
-            return false;
-        }
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(newBaloon.transform.position, newCollider.bounds.extents.x);
-
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.gameObject.tag == "Balloon" && collider != newCollider)
-            {
-                if (newCollider.bounds.Intersects(collider.bounds))
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 }

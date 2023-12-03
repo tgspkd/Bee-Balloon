@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
             Debug.Log("Killed!");
             Reset();
         } 
-
     }
 
     private void OnCollisionExit2D(Collision2D coll)
