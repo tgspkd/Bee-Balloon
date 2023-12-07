@@ -14,7 +14,7 @@ public class Main : MonoBehaviour
     private Text scoreUI;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         S = this;
         scoreUI = GameObject.Find("ScoreUI").GetComponent<Text>();

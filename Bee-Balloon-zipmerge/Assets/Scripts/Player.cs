@@ -14,12 +14,15 @@ public class Player : MonoBehaviour
     public float sensitivity = 20;
     private bool move = false;
 
+    private SpriteRenderer sprite;
+
 
     // Start is called before the first frame update
     void Awake()
     {
         // Always move Rigidbody, but lock transform.position when collision
         selectedObject = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,6 +35,21 @@ public class Player : MonoBehaviour
         // Convert the point from 2D screen space into 3D game world space
         mousePosition = Camera.main.ScreenToWorldPoint(mousePos2D);
         // Transform pos mouse (regular code)
+
+
+        // gets vector from mouse to bee
+        Vector3 direction = mousePosition - transform.position;
+        // finds the angle of the vector
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // transforms the bee accordingly
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        if (sprite != null) {
+            //  Mirrors the bee when facing left
+            if (angle > 90 || angle < -90) sprite.flipY = true; 
+            else sprite.flipY = false;
+        }
+   
     }
 
     void FixedUpdate()
