@@ -1,50 +1,51 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     Vector3 startPos3D = new Vector3(0, 0, 0);
+    Vector3 mousePos2D;
     Vector3 mousePosition;
-    private bool collided = false;
     public bool inKillZonePath = false;
 
     Vector3 offset;
     private Rigidbody2D selectedObject;
+    public float sensitivity = 20;
+    private bool move = false;
+
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        // Always move Rigidbody, but lock transform.position when collision
+        selectedObject = GetComponent<Rigidbody2D>();
     }
 
-// Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
-        {
-            Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
-
-            if (targetObject)
-            {
-                selectedObject = targetObject.transform.gameObject.GetComponent<Rigidbody2D>();
-                offset = selectedObject.transform.position - mousePosition;
-            }
-        }
-        if (Input.GetMouseButtonUp(0) && selectedObject)
-        {
-            selectedObject = null;
-        }
+        // Get the current mouse position in 2D screen coordinates
+        mousePos2D = Input.mousePosition;
+        // The Camera's z position sets how far to push the mouse into 3D, "connects" the object to the world
+        mousePos2D.z = -Camera.main.transform.position.z;
+        // Convert the point from 2D screen space into 3D game world space
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePos2D);
+        // Transform pos mouse (regular code)
     }
 
     void FixedUpdate()
     {
-        if (selectedObject)
+        if (selectedObject && move)
         {
-            selectedObject.MovePosition(mousePosition + offset);
+            selectedObject.velocity = (mousePosition - transform.position) * sensitivity;
         }
     }
 
+    private void OnMouseOver()
+    {
+        move = true;
+    }
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
@@ -68,12 +69,6 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         transform.position = startPos3D;
-        collided = true;
+        move = false;
     }
-
-    public void WarpMouse()
-    {
-
-    }
-
 }

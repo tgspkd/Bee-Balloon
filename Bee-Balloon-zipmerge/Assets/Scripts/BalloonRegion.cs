@@ -8,7 +8,7 @@ public class BalloonRegion : MonoBehaviour
     public float maxSize = 3f;
     public int seed = 0;
 
-    void Start()
+    void Awake()
     {
         if (seed == 0) seed = (int)System.DateTime.Now.Ticks;
         Random.InitState(seed);

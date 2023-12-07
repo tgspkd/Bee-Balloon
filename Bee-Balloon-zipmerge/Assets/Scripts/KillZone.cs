@@ -17,7 +17,7 @@ public class KillZone : MonoBehaviour
     public int pointsIndex = 0;
 
 
-    private void Start() {
+    private void Awake() {
         if (followsPath) {
             transform.position = Points[pointsIndex].transform.position;
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
 
-    private void Start() {
+    private void Awake() {
         // OverlapCircle(Vector2 transform.position, , ContactFilter2D contactFilter, );
         // ;
 
