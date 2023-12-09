@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Vector3 startPos3D = new Vector3(0, 0, 0);
+    Vector3 startPos3D;
     Vector3 mousePos2D;
     Vector3 mousePosition;
     public bool inKillZonePath = false;
+    public bool mirroring = false;
+    public float angelOffset = -90f;
 
     Vector3 offset;
     private Rigidbody2D selectedObject;
@@ -23,11 +25,13 @@ public class Player : MonoBehaviour
         // Always move Rigidbody, but lock transform.position when collision
         selectedObject = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        startPos3D = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Main.Paused) return;
         // Get the current mouse position in 2D screen coordinates
         mousePos2D = Input.mousePosition;
         // The Camera's z position sets how far to push the mouse into 3D, "connects" the object to the world
@@ -41,10 +45,11 @@ public class Player : MonoBehaviour
         Vector3 direction = mousePosition - transform.position;
         // finds the angle of the vector
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle += angelOffset;
         // transforms the bee accordingly
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        if (sprite != null) {
+        if (mirroring && sprite != null) {
             //  Mirrors the bee when facing left
             if (angle > 90 || angle < -90) sprite.flipY = true; 
             else sprite.flipY = false;

@@ -32,7 +32,7 @@ public class Bomb : MonoBehaviour
         print(other);
         if (other.gameObject.tag == "Bee") {
             print("Boom!");
-            Main.Score--;
+            Main.LoseLife();
             
             other.gameObject.GetComponent<Player>().Reset();
             Destroy(gameObject);

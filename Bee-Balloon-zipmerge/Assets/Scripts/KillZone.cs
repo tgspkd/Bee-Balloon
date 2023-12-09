@@ -26,6 +26,7 @@ public class KillZone : MonoBehaviour
     }
 
     private void Update() {
+        if (Main.Paused) return;
         if (followsPath) {
             if (pointsIndex <= Points.Length - 1 && pointsIndex > -1) {
                 // print(pointsIndex);
@@ -55,6 +56,7 @@ public class KillZone : MonoBehaviour
             Player p = other.gameObject.GetComponent<Player>();
             if (!followsPath || p.inKillZonePath) {
                 print("Killed!");
+                Main.LoseLife();
                 p.Reset();
             }
         }
