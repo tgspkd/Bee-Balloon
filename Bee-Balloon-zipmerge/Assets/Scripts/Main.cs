@@ -11,6 +11,8 @@ public class Main : MonoBehaviour
     private string date;
     private string elapsedTime;
 
+    public PreLevelScreen preLevelScreen;
+
     static private Main S;
 
     public int balloonsLeft = 0;
@@ -50,6 +52,14 @@ public class Main : MonoBehaviour
         life3 = GameObject.Find("Life3").GetComponent<Image>();
 
         pauseButton = GameObject.Find("PauseText").GetComponent<Text>();
+
+        StartLevelGUI();
+    }
+
+    void StartLevelGUI()
+    {
+        int level = Data.CurrentLevel;
+        preLevelScreen.Setup(level, 3);
     }
 
     // Update is called once per frame
@@ -135,8 +145,10 @@ public class Main : MonoBehaviour
     }
 
     public static void NextLevel() {
-        if (Data.CurrentLevel <= 3) {
-            SceneManager.LoadScene($"Level_{++Data.CurrentLevel}");
+        int level = Data.CurrentLevel;
+        if (level <= 3) {
+            SceneManager.LoadScene($"Level_{++level}");
+            S.preLevelScreen.Setup(level + 1, 3);
         }
         else {
             EndGame();

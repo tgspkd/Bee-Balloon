@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SubmitFields : MonoBehaviour
 {
@@ -16,13 +17,7 @@ public class SubmitFields : MonoBehaviour
     {
         username.text = nameField.text;
         feedback.text = feedback.text;
-        //status.text = "Thanks for playing!";
-
+        status.text = "Thanks for playing!";
         Main.GenerateReport(name: username.text, feedback: feedback.text);
-
     }
-
-    
-    
-   
 }

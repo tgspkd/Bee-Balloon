@@ -1511,6 +1511,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1612730340}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1550250330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1652,6 +1664,7 @@ GameObject:
   - component: {fileID: 1612730338}
   - component: {fileID: 1612730337}
   - component: {fileID: 1612730339}
+  - component: {fileID: 1612730340}
   m_Layer: 5
   m_Name: InputWindow
   m_TagString: Untagged
@@ -1731,11 +1744,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1960eee90a724cb09736e9fca8a2d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: {fileID: 0}
+  status: {fileID: 1391750416}
   username: {fileID: 388015793}
   feedback: {fileID: 1697812991}
   nameField: {fileID: 1999979629}
   feedbackField: {fileID: 590917104}
+--- !u!114 &1612730340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612730335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7a9a6036d1d4e99a1cdef24a194864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1697812989
 GameObject:
   m_ObjectHideFlags: 0
