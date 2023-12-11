@@ -16,7 +16,7 @@ public class EndGame : MonoBehaviour
         scoreUI = GameObject.Find("FinalScore").GetComponent<Text>();
         highScoreUI = GameObject.Find("HighScoreVal").GetComponent<Text>();
 
-        levelUI.text = "You made it to Level " + Data.FinalLevel.ToString();
+        levelUI.text = "You made it to Level " + Data.CurrentLevel.ToString();
         scoreUI.text = "Final Score: " + Data.Score.ToString();
 
         if (PlayerPrefs.HasKey("HighScore") && PlayerPrefs.GetInt("HighScore") > Data.Score)

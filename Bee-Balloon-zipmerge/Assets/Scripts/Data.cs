@@ -6,6 +6,10 @@ using UnityEngine;
 public class Data: MonoBehaviour
 {
     public static int FinalLevel;
+    public static int CurrentLevel = 1;
+
+    public static float Time = 240;
+    public static int Lives = 3;
     private static int _score;
 
     public static int Score

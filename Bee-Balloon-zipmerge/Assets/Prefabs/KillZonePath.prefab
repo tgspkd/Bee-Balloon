@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2443222443949051748}
   - component: {fileID: 2157551584856428856}
   - component: {fileID: 6229974690486715964}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite Mask (2)
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 6622457711212337513}
   - component: {fileID: 2077783214634360792}
   - component: {fileID: 6493210244018626219}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite Mask (5)
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 5268364781276297662}
   - component: {fileID: 2409938613877135131}
   - component: {fileID: 898490879267039113}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite Mask (6)
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 7772900140917689183}
   - component: {fileID: 4370811001138091553}
   - component: {fileID: 3741741057038979579}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite Mask (3)
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 4394312866529248780}
   - component: {fileID: 3915887454711614846}
   - component: {fileID: 8000100896149912938}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite Mask (1)
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}
@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 2153905948097818114}
   - component: {fileID: 1699017118250414804}
   - component: {fileID: 321927783359549871}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite Mask (4)
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}
@@ -1062,7 +1062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1316547604975039071}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: PathMask
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 3007958333059338438}
   - component: {fileID: 4114999801199798746}
   - component: {fileID: 280621621115813114}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite Mask
   m_TagString: KillZonePath
   m_Icon: {fileID: 0}

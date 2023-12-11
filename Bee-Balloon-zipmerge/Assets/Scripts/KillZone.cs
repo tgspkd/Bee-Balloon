@@ -6,6 +6,7 @@ public class KillZone : MonoBehaviour
 {
 
     public bool invertMask = false;
+    public bool hasMask = false;
 
 
     [Header("Path Based")]
@@ -29,9 +30,6 @@ public class KillZone : MonoBehaviour
         if (Main.Paused) return;
         if (followsPath) {
             if (pointsIndex <= Points.Length - 1 && pointsIndex > -1) {
-                // print(pointsIndex);
-                // print(reversing);
-                // print((reversing && pointsIndex >= 0));
                 transform.position = Vector3.MoveTowards(transform.position, Points[pointsIndex].transform.position, moveSpeed * Time.deltaTime);
 
                 if (transform.position == Points[pointsIndex].transform.position) {
@@ -42,37 +40,10 @@ public class KillZone : MonoBehaviour
                 if (reverseOnEnd) {
                     pointsIndex += reversing ? 1 : -1;
                     reversing = !reversing;
-                    print(reversing);
                 }
                 else pointsIndex = 0;
                 transform.position = Points[pointsIndex].transform.position;
             }
-        }
-    }
-
-
-    //private void OnCollisionEnter2D(Collision2D other) {
-    //    if (other.gameObject.tag == "Bee") {
-    //        Player p = other.gameObject.GetComponent<Player>();
-    //        if (!followsPath || p.inKillZonePath) {
-    //            print("Killed!");
-    //            Main.LoseLife();
-    //            p.Reset();
-    //        }
-    //    }
-    //}
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Bee")
-        {
-            Player p = other.gameObject.GetComponent<Player>();
-            //if (!followsPath || p.inKillZonePath)
-            //{
-                print("Killed!");
-                Main.LoseLife();
-                p.Reset();
-            //}
         }
     }
 }

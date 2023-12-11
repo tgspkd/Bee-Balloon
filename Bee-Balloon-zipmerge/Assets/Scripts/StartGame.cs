@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    public void ChangeScene(string SceneName)
+    public void ChangeScene(int LevelNum)
     {
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene($"Level_{LevelNum}");
+        Data.CurrentLevel = LevelNum;
     }
 }

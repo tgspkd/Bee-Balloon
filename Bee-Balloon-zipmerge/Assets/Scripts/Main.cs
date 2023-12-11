@@ -15,8 +15,6 @@ public class Main : MonoBehaviour
 
     public int balloonsLeft = 0;
 
-    private int lives = 3;
-
     private Text scoreUI;
     private Slider timer;
 
@@ -57,10 +55,15 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if (!Main.Paused) timer.value -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.P)) Main.Pause();
+        if (!Main.Paused) {
+            Data.Time -= Time.deltaTime;
+            timer.value = Data.Time;
+            if (Data.Time <= 0) EndGame();
+        };
     }
 
-    public void EndGame() {
+    public static void EndGame() {
         SceneManager.LoadScene("EndGame");
     }
 
@@ -69,19 +72,26 @@ public class Main : MonoBehaviour
         set { Data.Score = value; S.scoreUI.text = value.ToString();}
     }    
 
-    public static void AddBalloon() { S.balloonsLeft++; }
+    public static void AddBalloon() { 
+        S.balloonsLeft++; 
+    }
     public static void PopBalloon() { 
         S.balloonsLeft--; 
         Score += 10;
+
+        if (S.balloonsLeft <= 1) {
+            print("out of balloons");
+            NextLevel();
+        }
     }
     public static void RemoveBalloon() {
         S.balloonsLeft--;
-        print("balloon removed");
     }
 
     // End after three deaths, though do show the empty lives array on the Canvas
     public static void LoseLife() {
-        switch (S.lives) {
+        Score -= 5;
+        switch (Data.Lives) {
             case 3:
                 if (S.life1 != null) S.life1.enabled = false;
                 break;
@@ -90,13 +100,13 @@ public class Main : MonoBehaviour
                 break;
             case 1:
                 if (S.life3 != null) S.life3.enabled = false;
-                S.EndGame();
+                EndGame();
                 break;
             case 0:
-                S.EndGame();
+                EndGame();
                 break;
         }
-        S.lives--;
+        Data.Lives--;
     }
 
     public static bool Paused {
@@ -124,6 +134,13 @@ public class Main : MonoBehaviour
 
     }
 
-
+    public static void NextLevel() {
+        if (Data.CurrentLevel <= 3) {
+            SceneManager.LoadScene($"Level_{++Data.CurrentLevel}");
+        }
+        else {
+            EndGame();
+        }
+    }
 
 }

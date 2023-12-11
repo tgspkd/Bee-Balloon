@@ -31,7 +31,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Main.Paused) return;
+
         // Get the current mouse position in 2D screen coordinates
         mousePos2D = Input.mousePosition;
         // The Camera's z position sets how far to push the mouse into 3D, "connects" the object to the world
@@ -72,20 +74,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
+        print(coll.gameObject.tag);
         if (coll.gameObject.tag == "Walls")
         {
             Debug.Log("Collided with wall");
         }
-        //else if (coll.gameObject.tag == "KillZonePath") inKillZonePath = true;
-        else if (coll.gameObject.tag == "KillZone") {
-            Debug.Log("Killed!");
-            Reset();
-        } 
-    }
-
-    private void OnCollisionExit2D(Collision2D coll)
-    {
-        if (coll.gameObject.tag == "KillZonePath") inKillZonePath = false;
     }
 
     // I added this function since the bombs also have to reset the player back to the start
@@ -94,4 +87,26 @@ public class Player : MonoBehaviour
         transform.position = startPos3D;
         move = false;
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        print(other.tag);
+        if (other.gameObject.tag == "KillZonePath") {
+            inKillZonePath = true;
+            print("in kill zone path");
+        }
+        else if (other.gameObject.tag == "KillZone") {
+            print("in kill zone");
+            KillZone kz = other.gameObject.GetComponent<KillZone>();
+            if (!kz.hasMask|| inKillZonePath) {
+                print("Killed!");
+                Main.LoseLife();
+                Reset();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        print(other.tag);
+        if (other.gameObject.tag == "KillZonePath") inKillZonePath = false;
+    }       
 }
