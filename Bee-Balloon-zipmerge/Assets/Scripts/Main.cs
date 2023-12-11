@@ -14,6 +14,8 @@ public class Main : MonoBehaviour
     public PreLevelScreen preLevelScreen;
 
     static private Main S;
+    public float timeLimit = 240;
+    public int maxLives = 3;
 
     public int balloonsLeft = 0;
 
@@ -28,7 +30,7 @@ public class Main : MonoBehaviour
     // Saves and serializes the player data into JSON
     public static void GenerateReport(string name, string feedback)
     {
-        S.elapsedTime = Time.timeSinceLevelLoad.ToString("F2") + " seconds";
+        S.elapsedTime = Time.realtimeSinceStartupAsDouble.ToString("F2") + " seconds";
         S.date = System.DateTime.Now.ToString();
 
         S.saveData.name = name;
@@ -145,9 +147,11 @@ public class Main : MonoBehaviour
     }
 
     public static void NextLevel() {
+        Data.Lives = S.maxLives;
+        Data.Time = S.timeLimit;
         int level = Data.CurrentLevel;
         if (level <= 3) {
-            SceneManager.LoadScene($"Level_{++level}");
+            SceneManager.LoadScene($"Level_{++Data.CurrentLevel}");
             S.preLevelScreen.Setup(level + 1, 3);
         }
         else {
