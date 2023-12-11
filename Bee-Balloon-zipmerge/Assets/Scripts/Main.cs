@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
+    // For save data
+    private SaveData saveData = new SaveData();
+    private string date;
+    private string elapsedTime;
 
     static private Main S;
 
@@ -13,7 +17,6 @@ public class Main : MonoBehaviour
 
     private int lives = 3;
 
-    private int _score = 0;
     private Text scoreUI;
     private Slider timer;
 
@@ -21,6 +24,20 @@ public class Main : MonoBehaviour
     private Image life2;
     private Image life3;
     private Text pauseButton;
+
+    // Saves and serializes the player data into JSON
+    public static void GenerateReport(string name, string feedback)
+    {
+        S.elapsedTime = Time.timeSinceLevelLoad.ToString("F2") + " seconds";
+        S.date = System.DateTime.Now.ToString();
+
+        S.saveData.name = name;
+        S.saveData.date = S.date;
+        S.saveData.elapsedTime = S.elapsedTime;
+        S.saveData.feedback = feedback;
+
+        Data.SaveToJson(S.saveData);
+    }
 
     // Start is called before the first frame update
     void Awake()
@@ -43,7 +60,7 @@ public class Main : MonoBehaviour
         if (!Main.Paused) timer.value -= Time.deltaTime;
     }
 
-    public static void EndGame() {
+    public void EndGame() {
         SceneManager.LoadScene("EndGame");
     }
 
@@ -62,6 +79,7 @@ public class Main : MonoBehaviour
         print("balloon removed");
     }
 
+    // End after three deaths, though do show the empty lives array on the Canvas
     public static void LoseLife() {
         switch (S.lives) {
             case 3:
@@ -72,9 +90,10 @@ public class Main : MonoBehaviour
                 break;
             case 1:
                 if (S.life3 != null) S.life3.enabled = false;
+                S.EndGame();
                 break;
             case 0:
-                EndGame();
+                S.EndGame();
                 break;
         }
         S.lives--;
@@ -104,5 +123,7 @@ public class Main : MonoBehaviour
         }
 
     }
+
+
 
 }

@@ -29,7 +29,6 @@ public class Bomb : MonoBehaviour
         // }
     }
     private void OnCollisionEnter2D(Collision2D other) {
-        print(other);
         if (other.gameObject.tag == "Bee") {
             print("Boom!");
             Main.LoseLife();

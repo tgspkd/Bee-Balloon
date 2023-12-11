@@ -51,14 +51,28 @@ public class KillZone : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag == "Bee") {
+    //private void OnCollisionEnter2D(Collision2D other) {
+    //    if (other.gameObject.tag == "Bee") {
+    //        Player p = other.gameObject.GetComponent<Player>();
+    //        if (!followsPath || p.inKillZonePath) {
+    //            print("Killed!");
+    //            Main.LoseLife();
+    //            p.Reset();
+    //        }
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Bee")
+        {
             Player p = other.gameObject.GetComponent<Player>();
-            if (!followsPath || p.inKillZonePath) {
+            //if (!followsPath || p.inKillZonePath)
+            //{
                 print("Killed!");
                 Main.LoseLife();
                 p.Reset();
-            }
+            //}
         }
     }
 }

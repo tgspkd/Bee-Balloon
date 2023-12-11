@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Data
+public class Data: MonoBehaviour
 {
-
     public static int FinalLevel;
     private static int _score;
 
@@ -23,6 +22,21 @@ public static class Data
         }
     }
 
+    public static void SaveToJson(SaveData saveData)
+    {
+        saveData._score = Score;
+        string data = JsonUtility.ToJson(saveData);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/SaveData.json", data);
+        print("Saved!");
+    }
+}
 
-
+[System.Serializable]
+public class SaveData
+{
+    public string name;
+    public int _score;
+    public string date;
+    public string elapsedTime;
+    public string feedback;
 }

@@ -6,19 +6,18 @@ using UnityEngine.UI;
 
 public class EndGame : MonoBehaviour
 {
-
     private Text levelUI;
     private Text scoreUI;
     private Text highScoreUI;
 
     void Start()
     {
-        levelUI = GameObject.Find("LevelVal").GetComponent<Text>();
-        scoreUI = GameObject.Find("ScoreVal").GetComponent<Text>();
+        levelUI = GameObject.Find("Level").GetComponent<Text>();
+        scoreUI = GameObject.Find("FinalScore").GetComponent<Text>();
         highScoreUI = GameObject.Find("HighScoreVal").GetComponent<Text>();
 
-        // levelUI.text = GameData.FinalLevel.ToString();
-        scoreUI.text = Data.Score.ToString();
+        levelUI.text = "You made it to Level " + Data.FinalLevel.ToString();
+        scoreUI.text = "Final Score: " + Data.Score.ToString();
 
         if (PlayerPrefs.HasKey("HighScore") && PlayerPrefs.GetInt("HighScore") > Data.Score)
         {
