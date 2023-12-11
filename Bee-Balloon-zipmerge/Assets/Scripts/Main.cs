@@ -54,6 +54,11 @@ public class Main : MonoBehaviour
         life3 = GameObject.Find("Life3").GetComponent<Image>();
 
         pauseButton = GameObject.Find("PauseText").GetComponent<Text>();
+        pauseButton.text = "▶";
+        RectTransform rect = pauseButton.GetComponent<RectTransform>();
+        rect.localScale = new Vector3(.5f, .5f, 1);
+        rect.localScale = new Vector3(1, 1, 1);
+        // S.pauseButton.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
 
         StartLevelGUI();
     }
