@@ -7,7 +7,6 @@ public class KillZone : MonoBehaviour
 
     public bool invertMask = false;
 
-
     [Header("Path Based")]
     public bool followsPath = false;
     public bool reverseOnEnd = false;

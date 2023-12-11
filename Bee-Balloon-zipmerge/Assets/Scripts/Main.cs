@@ -30,9 +30,9 @@ public class Main : MonoBehaviour
     {
         S.elapsedTime = Time.timeSinceLevelLoad.ToString("F2") + " seconds";
         S.date = System.DateTime.Now.ToString();
-
         S.saveData.name = name;
         S.saveData.date = S.date;
+        S.saveData._score = Data.Score;
         S.saveData.elapsedTime = S.elapsedTime;
         S.saveData.feedback = feedback;
 

@@ -16,7 +16,6 @@ public class SubmitFields : MonoBehaviour
     {
         username.text = nameField.text;
         feedback.text = feedback.text;
-        //status.text = "Thanks for playing!";
 
         Main.GenerateReport(name: username.text, feedback: feedback.text);
 
