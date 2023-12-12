@@ -6,7 +6,7 @@ using UnityEngine;
 public class Data: MonoBehaviour
 {
     public static int FinalLevel;
-    public static int CurrentLevel = 1;
+    public static int _level = 1;
 
     public static float Time = 240;
     public static int Lives = 3;
@@ -23,6 +23,14 @@ public class Data: MonoBehaviour
             {
                 PlayerPrefs.SetInt("HighScore", _score);
             }
+        }
+    }
+
+    public static int CurrentLevel {
+        get { return _level; }
+        set {
+            _level = value;
+            PlayerPrefs.SetInt("FinalLevel", _level);
         }
     }
 

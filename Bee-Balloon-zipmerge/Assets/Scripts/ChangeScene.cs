@@ -13,6 +13,8 @@ public class ChangeScene : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        Data.Time = 240;
+        Data.Score = 0;
         StartCoroutine(ChangeSceneAfter(sceneName: "StartGame", seconds: 2));
     }
 

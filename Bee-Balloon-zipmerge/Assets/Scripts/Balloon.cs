@@ -7,7 +7,6 @@ public class Balloon : MonoBehaviour
     void Start()
     {
         Main.AddBalloon();
-        print(this);
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 

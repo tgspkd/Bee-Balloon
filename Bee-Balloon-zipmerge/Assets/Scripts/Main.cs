@@ -15,7 +15,7 @@ public class Main : MonoBehaviour
 
     static private Main S;
     public float timeLimit = 240;
-    public int maxLives = 3;
+    public int lives = 3;
 
     public int balloonsLeft = 0;
 
@@ -75,7 +75,7 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) Main.Pause();
         if (!Main.Paused) {
             Data.Time -= Time.deltaTime;
-            timer.value = Data.Time;
+            timer.value = Data.Time; 
             if (Data.Time <= 0) EndGame();
         };
     }
@@ -108,7 +108,7 @@ public class Main : MonoBehaviour
     // End after three deaths, though do show the empty lives array on the Canvas
     public static void LoseLife() {
         Score -= 5;
-        switch (Data.Lives) {
+        switch (S.lives) {
             case 3:
                 if (S.life1 != null) S.life1.enabled = false;
                 break;
@@ -123,7 +123,7 @@ public class Main : MonoBehaviour
                 EndGame();
                 break;
         }
-        Data.Lives--;
+        S.lives--;
     }
 
     public static bool Paused {
@@ -152,8 +152,6 @@ public class Main : MonoBehaviour
     }
 
     public static void NextLevel() {
-        Data.Lives = S.maxLives;
-        Data.Time = S.timeLimit;
         int level = Data.CurrentLevel;
         if (level <= 3) {
             SceneManager.LoadScene($"Level_{++Data.CurrentLevel}");
